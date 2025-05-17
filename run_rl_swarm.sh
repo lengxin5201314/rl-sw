@@ -104,11 +104,10 @@ CONNECT_TO_TESTNET=true
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac 系统下默认选择 A 任务和 0.5B 模型
     # 已禁用默认配置
-    # echo_green ">> 在 Mac 系统默认 Math (A) 任务 0.5B 模型"
-    # USE_BIG_SWARM=false
-    # SWARM_CONTRACT="$SMALL_SWARM_CONTRACT"
-    # PARAM_B=0.5
-    :  # 空操作，保持脚本结构完整
+    # 手动设置默认值
+    USE_BIG_SWARM=false
+    SWARM_CONTRACT="$SMALL_SWARM_CONTRACT"
+    PARAM_B=0.5
 else
     # 非 Mac 系统下保持原有交互式选择
     while true; do
@@ -137,6 +136,12 @@ else
             *)  echo ">>> Please answer in [0.5, 1.5, 7, 32, 72]." ;;
         esac
     done
+fi
+
+# 添加一个保底检查，确保SWARM_CONTRACT总是被设置
+if [ -z "$SWARM_CONTRACT" ]; then
+    echo_green ">> 警告：未设置SWARM_CONTRACT，使用默认小型合约"
+    SWARM_CONTRACT="$SMALL_SWARM_CONTRACT"
 fi
 
 if [ "$CONNECT_TO_TESTNET" = true ]; then
