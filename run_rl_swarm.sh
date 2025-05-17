@@ -103,10 +103,12 @@ CONNECT_TO_TESTNET=true
 # 检测操作系统类型
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac 系统下默认选择 A 任务和 0.5B 模型
-    echo_green ">> 在 Mac 系统默认 Math (A) 任务 0.5B 模型"
-    USE_BIG_SWARM=false
-    SWARM_CONTRACT="$SMALL_SWARM_CONTRACT"
-    PARAM_B=0.5
+    # 已禁用默认配置
+    # echo_green ">> 在 Mac 系统默认 Math (A) 任务 0.5B 模型"
+    # USE_BIG_SWARM=false
+    # SWARM_CONTRACT="$SMALL_SWARM_CONTRACT"
+    # PARAM_B=0.5
+    :  # 空操作，保持脚本结构完整
 else
     # 非 Mac 系统下保持原有交互式选择
     while true; do
